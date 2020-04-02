@@ -1,0 +1,10 @@
+
+dumpert/dumpert/__pycache__/
+
+dumpert/reetenstats/__pycache__/
+
+.idea/
+
+dumpert/reetenstats/migrations/__pycache__/
+
+dumpert/db.sqlite3
