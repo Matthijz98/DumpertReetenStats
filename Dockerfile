@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Set work directory
-WORKDIR /dumpert
+WORKDIR /code
 
 # Install dependencies
 RUN pip install pipenv
