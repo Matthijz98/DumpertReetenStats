@@ -1,1 +1,1 @@
-web: gunicorn dumpert.wsgi
+web: gunicorn --pythonpath dumpert dumpert.wsgi
