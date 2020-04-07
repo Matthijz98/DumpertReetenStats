@@ -1,0 +1,64 @@
+{% extends 'reetenstats/base.html' %}
+
+{% block content %}
+
+    <h1>{{ show.show_title }}</h1>
+    <div class="flex-container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card video-card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ show.show_youtube_id }}" allowfullscreen=""></iframe>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>{{ show.show_title }}</td>
+                            </tr>
+                            <tr>
+                                <td>Datum</td>
+                                <td>{{ show.show_date }}</td>
+                            </tr>
+                            <tr>
+                                <td>NR Items</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Totaal Reeten</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">{{ show.show_description }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-header">Reetings</div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

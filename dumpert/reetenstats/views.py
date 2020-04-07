@@ -4,10 +4,17 @@ import csv
 import datetime
 
 # Create your views here.
-def showvieuw(request):
+def showsview(request):
     return render(request=request,
                   template_name='reetenstats/shows.html',
                   context={"shows": Show.objects.all()})
+
+
+def showview(request):
+    return render(request=request,
+                  template_name='reetenstats/show.html',
+                  context={"show":Show.objects.filter(id=1)[0]})
+
 
 def importview(request):
     with open('../../DumpertReetenStats/data/shows.csv') as csv_file:
