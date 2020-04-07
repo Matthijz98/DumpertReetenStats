@@ -1,0 +1,4 @@
+django
+django-filer
+django-csvimport
+django-heroku

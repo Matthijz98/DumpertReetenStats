@@ -1,13 +1,23 @@
 from django.db import models
 from filer.fields.image import FilerImageField
 
+
 class Gast(models.Model):
     gast_name = models.CharField(max_length=64)
     gast_underline = models.CharField(max_length=64)
+    gast_age = models.DateField(null=True, blank=True)
     gast_img = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
-    gast_facebook = models.URLField()
-    gast_instagram = models.URLField()
-    gast_website = models.URLField()
+    gast_facebook = models.URLField(null=True, blank=True)
+    gast_instagram = models.URLField(null=True, blank=True)
+    gast_website = models.URLField(null=True, blank=True)
+    gast_snapchat = models.CharField(max_length=128, null=True, blank=True)
+    gast_twitter = models.URLField(null=True, blank=True)
+    gast_twitch = models.URLField(null=True, blank=True)
+    gast_youtube = models.URLField(null=True, blank=True)
+    gast_wiki = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.gast_name
 
 
 class Show(models.Model):
@@ -16,6 +26,10 @@ class Show(models.Model):
     show_gasten = models.ManyToManyField(Gast)
     show_youtube_id = models.CharField(max_length=32)
     show_dumpert_id = models.CharField(max_length=32)
+    show_date = models.DateField(null=True)
+
+    def __str__(self):
+        return self.show_title
 
 
 class Video(models.Model):
@@ -23,9 +37,15 @@ class Video(models.Model):
     video_description = models.TextField()
     video_dumpert_id = models.CharField(max_length=64)
 
+    def __str__(self):
+        return self.video_title
+
 
 class RatingType(models.Model):
     rating_type_name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.rating_type_name
 
 
 class Rating(models.Model):
@@ -33,3 +53,8 @@ class Rating(models.Model):
     rating_by = models.ForeignKey(Gast, on_delete=models.CASCADE)
     rating_type = models.ForeignKey(RatingType, on_delete=models.CASCADE)
     rating_ammount = models.DecimalField(max_digits=6, decimal_places=3)
+    rating_video = models.ForeignKey(Video, on_delete=models.CASCADE)
+
+    # def __str__(self):
+    #     return str(self.rating_in_show)
+

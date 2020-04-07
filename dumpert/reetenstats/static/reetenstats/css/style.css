@@ -1,0 +1,12 @@
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header-img{
+    width: 100%;
+}
+
+.zeropadding{
+    padding: unset !important;
+}

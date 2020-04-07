@@ -1,3 +1,0 @@
-django
-django-filer
-django-csvimport
