@@ -1,3 +1,4 @@
 django
 django-filer
 gunicorn
+psycopg2
