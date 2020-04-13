@@ -2,6 +2,13 @@ runtime: custom
 api_version: '1.0'
 env: flexible
 threadsafe: true
+env_variables:
+  DB_TYPE: "postgressql"
+  DB_NAME: "dumpert"
+  DB_USER: "postgres"
+  DB_PASSWORD: "6PcKovri!6g2j&"
+  DB_HOST: "/cloudsql/dumpert-273512:europe-west4:dumpertdb"
+  DB_PORT: "5432"
 automatic_scaling:
   min_num_instances: 1
   max_num_instances: 5
@@ -20,3 +27,5 @@ readiness_check:
   failure_threshold: 2
   success_threshold: 2
   app_start_timeout_sec: 300
+beta_settings:
+  cloud_sql_instances: "dumpert-273512:europe-west4:dumpertdb"

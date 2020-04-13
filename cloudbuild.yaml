@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/dumpert-273512/github.com/matthijz98/dumpertreetenstats:latest', '.']
+  args: ['build', '-t', 'gcr.io/dumpert-273512/dumpertreetenstats:latest', '.']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy']
   timeout: '1600s'
