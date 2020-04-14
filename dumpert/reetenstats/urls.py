@@ -20,5 +20,4 @@ from . import views
 urlpatterns = [
     path('', views.showsview),
     path('show/', views.showview),
-    path('import/', views.importview)
 ]
