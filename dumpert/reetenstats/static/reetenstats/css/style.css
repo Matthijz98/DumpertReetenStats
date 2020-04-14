@@ -1,6 +1,5 @@
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
+.page-container {
+    padding: 15px;
 }
 
 .header-img{
@@ -11,7 +10,49 @@
     padding: unset !important;
 }
 
+.zeromarin{
+    margin: unset !important;
+}
+
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
+
+/*
+    shows page
+*/
+.show_card{
+    margin-bottom: 15px !important;
+    margin-top: 15px !important;
+}
+
+.show_card .card-header{
+    position: relative;
+    padding-bottom: 56.2% !important;
+}
+
+.show_card .card-header img{
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.show_card p{
+    text-align: center;
+    margin-bottom: unset !important;
+}
+
+[class^="material-icons"], [class*="material-icons"] {
+    display: inline-block;
+    width: 100%;
+}
+
+.show_card i {
+    text-align:center;
+}
+
+.show_stat{
+    display: inline-block;
+}

@@ -11,9 +11,9 @@ def showsview(request):
                   annotate(total_videos=Count('ratings_in_show__rating_video', distinct=True))})
 
 
-def showview(request):
+def showview(request, show_id):
     return render(request=request,
                   template_name='reetenstats/show.html',
-                  context={"show":Show.objects.filter(id=1)[0]})
+                  context={"show":Show.objects.filter(id=show_id)[0]})
 
 
