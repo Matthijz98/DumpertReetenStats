@@ -23,7 +23,6 @@ class Gast(models.Model):
 class Show(models.Model):
     show_title = models.CharField(max_length=255)
     show_description = models.TextField()
-    show_gasten = models.ManyToManyField(Gast)
     show_youtube_id = models.CharField(max_length=32)
     show_dumpert_id = models.CharField(max_length=32)
     show_date = models.DateField(null=True)
@@ -49,7 +48,7 @@ class RatingType(models.Model):
 
 
 class Rating(models.Model):
-    rating_in_show = models.ForeignKey(Show, on_delete=models.CASCADE)
+    rating_in_show = models.ForeignKey(Show, related_name='ratings_in_show', on_delete=models.CASCADE)
     rating_by = models.ForeignKey(Gast, on_delete=models.CASCADE)
     rating_type = models.ForeignKey(RatingType, on_delete=models.CASCADE)
     rating_ammount = models.DecimalField(max_digits=6, decimal_places=3)
