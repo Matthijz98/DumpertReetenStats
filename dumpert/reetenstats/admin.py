@@ -28,7 +28,7 @@ class RatingInlineAdmin(admin.StackedInline):
 
 class ShowAdmin(admin.ModelAdmin):
     model = Show
-    list_display = ["show_title", "show_date", "show_youtube_id", "show_youtube_id"]
+    list_display = ["show_title", "show_date", "show_youtube_id", "show_dumpert_id", "gasten_count", "rating_sum", "video_count"]
     inlines = [RatingInlineAdmin]
 
 
