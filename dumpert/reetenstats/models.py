@@ -1,6 +1,6 @@
 from django.db import models
 from filer.fields.image import FilerImageField
-
+from django.db.models import Count, Sum
 
 class Gast(models.Model):
     gast_name = models.CharField(max_length=64)
@@ -26,6 +26,15 @@ class Show(models.Model):
     show_youtube_id = models.CharField(max_length=32)
     show_dumpert_id = models.CharField(max_length=32)
     show_date = models.DateField(null=True)
+
+    def gasten_count(self):
+        return Rating.objects.all().filter(rating_in_show = self.id).aggregate(gastencount = Count("rating_by", distinct=True))['gastencount']
+
+    def rating_sum(self):
+        return Rating.objects.all().filter(rating_in_show = self.id).aggregate(ratingsum = Sum("rating_ammount", distinct=True))['ratingsum']
+
+    def video_count(self):
+        return Rating.objects.all().filter(rating_in_show = self.id).aggregate(videocount = Count("rating_video", distinct=True))['videocount']
 
     def __str__(self):
         return self.show_title

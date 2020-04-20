@@ -7,10 +7,7 @@ from django.http import HttpResponse, request, Http404
 def showsview(request):
     return render(request=request,
                   template_name='reetenstats/shows.html',
-                  context={"shows": Show.objects.all().order_by('-show_date').
-                  annotate(num_gasten=Count('ratings_in_show__rating_by', distinct=True)).
-                  annotate(total_reeten=Sum('ratings_in_show__rating_ammount')).
-                  annotate(total_videos=Count('ratings_in_show__rating_video', distinct=True))})
+                  context={"shows": Show.objects.all().order_by('-show_date')})
 
 
 def showview(request, show_id):
