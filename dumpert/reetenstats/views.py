@@ -23,11 +23,11 @@ def ratinginfojsonview(request,):
     results = []
 
     for video in videos:
-        ratings = Rating.objects.all().filter(rating_in_show=show_id).filter(rating_video=video.id)
+        ratings = Rating.objects.all().filter(rating_in_show=show_id).filter(rating_video=video.id).exclude(rating_type=0)
         ratings_in_video = []
         for rating in ratings:
             ratings_in_video.append({"by":rating.rating_by.gast_name,
-                                     "rating_amount": str(rating.rating_ammount),
+                                     "rating_amount": str('%g'%(rating.rating_ammount)),
                                      "rating_type": rating.rating_type.rating_type_name})
 
         results.append({

@@ -60,7 +60,7 @@ class Rating(models.Model):
     rating_in_show = models.ForeignKey(Show, related_name='ratings_in_show', on_delete=models.CASCADE)
     rating_by = models.ForeignKey(Gast, on_delete=models.CASCADE)
     rating_type = models.ForeignKey(RatingType, on_delete=models.CASCADE)
-    rating_ammount = models.DecimalField(max_digits=6, decimal_places=3)
+    rating_ammount = models.DecimalField(max_digits=6, decimal_places=3, default=0)
     rating_video = models.ForeignKey(Video, on_delete=models.CASCADE)
 
     # def __str__(self):
