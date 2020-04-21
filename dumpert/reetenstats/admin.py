@@ -5,14 +5,14 @@ from .models import Show, Gast, RatingType, Rating, Video
 class VideoAdmin(admin.ModelAdmin):
     search_fields = ["video_tile"]
     list_display = ["video_title", "video_dumpert_id"]
-
+    ordering = ['-id']
 
 class RatingTypeAdmin(admin.ModelAdmin):
-    search_fields = ["rating_name"]
+    search_fields = ["rating_type_name"]
 
 
 class GastAdmin(admin.ModelAdmin):
-    search_fields = ["gast_name", "rating_type"]
+    search_fields = ["gast_name"]
     list_display = ["gast_name", "gast_facebook", "gast_instagram", "gast_website", "gast_snapchat", "gast_twitter", "gast_twitch", "gast_youtube", "gast_wiki"]
 
 
@@ -23,7 +23,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 class RatingInlineAdmin(admin.StackedInline):
     model = Rating
-    autocomplete_fields = ["rating_by", "rating_type"]
+    autocomplete_fields = ["rating_by", "rating_type", "rating_video"]
 
 
 class ShowAdmin(admin.ModelAdmin):
