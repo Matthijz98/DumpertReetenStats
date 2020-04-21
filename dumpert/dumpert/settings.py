@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -154,3 +156,18 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
+
+###################
+# Sentry Settings #
+###################
+SENTRY_ENABLE = os.getenv('SENTRY_ENABLE', 'false')
+
+if SENTRY_ENABLE == "true":
+    sentry_sdk.init(
+        dsn="https://30d95b7b587948eb9136367a81a2bbc8@o325630.ingest.sentry.io/1832079",
+        integrations=[DjangoIntegration()],
+
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
+    )

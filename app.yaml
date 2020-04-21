@@ -9,6 +9,7 @@ env_variables:
   DB_PASSWORD: "6PcKovri!6g2j&"
   DB_HOST: "/cloudsql/dumpert-273512:europe-west4:dumpertdb"
   DB_PORT: "5432"
+  SENTRY_ENABLE: "true"
 automatic_scaling:
   min_num_instances: 1
   max_num_instances: 5
