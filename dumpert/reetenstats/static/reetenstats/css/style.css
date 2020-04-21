@@ -1,5 +1,6 @@
 .page-container {
     padding: 15px;
+    background: azure;
 }
 
 .header-img{
@@ -14,6 +15,10 @@
     margin: unset !important;
 }
 
+.row{
+    padding-bottom: 15px !important;
+}
+
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
@@ -25,6 +30,7 @@
 .show_card{
     margin-bottom: 15px !important;
     margin-top: 15px !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 }
 
 .show_card .card-header{
@@ -55,4 +61,12 @@
 
 .show_stat{
     display: inline-block;
+}
+
+/*
+ show page
+*/
+
+.show_info_card p{
+    padding: 12px;
 }
