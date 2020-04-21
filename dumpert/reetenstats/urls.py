@@ -21,4 +21,5 @@ urlpatterns = [
     path('', views.showsview),
     path('show/dumperteeten-<int:show_id>', views.showview),
     path('api/json/ratingsinshow', views.ratinginfojsonview),
+    path('ads.txt', views.adsview),
 ]
