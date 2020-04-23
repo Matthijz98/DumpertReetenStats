@@ -3,6 +3,19 @@
     background: azure;
 }
 
+.card,
+.navbar{
+    -webkit-box-shadow: -10px 10px 30px -10px rgba(0,0,0,0.4) !important;
+    -moz-box-shadow: -10px 10px 30px -10px rgba(0,0,0,0.4) !important;
+    box-shadow: -10px 10px 30px -10px rgba(0,0,0,0.4) !important;
+}
+.card{
+    overflow: hidden;
+    border-radius: calc(.3rem - 1px) calc(.3rem - 1px);
+    border: unset !important;
+}
+
+
 .header-img{
     width: 100%;
 }
@@ -30,7 +43,7 @@
 .show_card{
     margin-bottom: 15px !important;
     margin-top: 15px !important;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    overflow: hidden;
 }
 
 .show_card .card-header{
@@ -63,10 +76,29 @@
     display: inline-block;
 }
 
+.show_card .row{
+    padding-bottom: unset!important;
+}
 /*
  show page
 */
 
 .show_info_card p{
     padding: 12px;
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .show_info_card{
+        margin-right: 60px;
+        margin-left: 60px;
+    }
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    .show_info_card{
+        margin-right: 20%;
+        margin-left: 20%;
+    }
 }

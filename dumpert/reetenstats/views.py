@@ -42,6 +42,16 @@ def ratinginfojsonview(request,):
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 
+
 def adsview(request):
     line = "google.com, pub-1287147359957350, DIRECT, f08c47fec0942fa0"
     return HttpResponse(line)
+
+
+def aboutview(request):
+    return render(request=request,
+                  template_name='reetenstats/about.html')
+
+def top10view(request):
+    return  render(request=request,
+                   template_name='reetenstats/top10.html')
