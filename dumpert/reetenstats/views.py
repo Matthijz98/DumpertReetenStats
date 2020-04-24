@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Show, Rating, Video
-from django.db.models import Count, Sum
 import json
+from django.db.models import Avg, Sum
 from django.http import HttpResponse, request, Http404
 
 def showsview(request):
@@ -52,6 +52,34 @@ def aboutview(request):
     return render(request=request,
                   template_name='reetenstats/about.html')
 
+
 def top10view(request):
-    return  render(request=request,
+    return render(request=request,
                    template_name='reetenstats/top10.html')
+
+
+def top10jsonview(reuest):
+    results = []
+
+    # reeten in shows
+    ratings = Rating.objects.values('rating_in_show__show_title').annotate(total=Sum('rating_ammount')).order_by('-total')[:10]
+    top = []
+    for rating in ratings:
+        top.append({"key": rating["rating_in_show__show_title"], "value": str(rating["total"])})
+    results.append({"name": 'Reeten in show', "data":top})
+
+    # gasten
+    ratings = Rating.objects.values('rating_by__gast_name').annotate(total=Sum('rating_ammount')).order_by(
+        '-total')[:10]
+    top = []
+    for rating in ratings:
+        top.append({"key": rating["rating_by__gast_name"], "value": str(rating["total"])})
+    results.append({"name": 'Aantal reeten per gast', "data": top})
+
+
+
+
+
+    data = json.dumps(results)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
