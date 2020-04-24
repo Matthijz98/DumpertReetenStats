@@ -4,7 +4,6 @@
 
 {% block content %}
 
-    <h1>Shows</h1>
     <div class="page-container">
         <div class="card-deck">
         {% for show in shows %}
@@ -15,19 +14,19 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="show_stat">
                                     <i class="material-icons md-48">people</i>
                                     <p>{{ show.gasten_count }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="show_stat">
                                     <img src="{% static 'reetenstats/img/reet/reet-64.png' %}">
                                     <p>{{ show.rating_sum }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="show_stat">
                                     <i class="material-icons md-48">movie</i>
                                     <p>{{ show.video_count }}</p>

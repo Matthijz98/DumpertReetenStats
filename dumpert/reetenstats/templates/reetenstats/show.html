@@ -3,14 +3,13 @@
 {% block content %}
 <div id="show_id" style="display: none">{{ show.id }}</div>
 
-<h1>{{ show.show_title }}</h1>
 <div class="page-container">
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card video-card">
+            <div class="card video-card show_info_card">
         <div class="card-header">
-
+            {{ show.show_title }}
         </div>
         <div class="card-body zeropadding">
             <div class="embed-responsive embed-responsive-16by9">
@@ -76,25 +75,26 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-            <div class="card-header">Reetings</div>
-            <div class="card-body zeropadding" id="reeting-card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Video</td>
-                            <td>Video info</td>
-                            <td>Video reetings</td>
-                        </tr>
-                    </thead>
-                    <tbody id="ratings-table">
-                    </tbody>
-                </table>
+            <div class="card ">
+                <div class="card-header">Reetings</div>
+                <div class="card-body zeropadding" id="reeting-card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Video</td>
+                                <td>Video info</td>
+                                <td>Video reetings</td>
+                            </tr>
+                        </thead>
+                        <tbody id="ratings-table">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        </div>
     </div>
-
 </div>
-
+{%  load static %}
+<script src="{% static 'reetenstats/js/show.js' %}"></script>
 {% endblock %}
+

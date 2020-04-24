@@ -1,0 +1,54 @@
+{% extends 'reetenstats/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="page-container page-card">
+        <div class="card">
+            <div class="card-header">
+                Over dumepertreeten-stats
+            </div>
+            <div class="card-body">
+
+                <h2>Over de data</h2>
+                <p>
+                    De data is grotendeels automatisch opgehaald door de api van YouTube en door het scrapen van dumpert.nl.
+                    Wel zijn er een aantal regels aangehouden om de data zo constant mogenlijk te houden:
+                    <ul>
+                        <li>De title en datum komen van YouTube</li>
+                        <li>De video's zijn autmatisch toegevoegd via de linkjes uit de dumpert omschrijving</li>
+                        <li>Reetings die niet bij een video horen zijn niet mee genomen</li>
+                        <li>De reeten totalen bij de shows zijn alle reeting types bij elkaar geteld</li>
+                    </ul>
+                </p>
+
+                <h2>FAQ</h2>
+                <h3>Hoe kwam je op het idee?</h3>
+                <p>Ik wordt heel erg blij van data en van dumptertreeten.
+                    Dus toen dacht ik volgens mij kan ik dat mooi combineren.
+                    Ik ben ooit begonnen met een excel sheet maar al snel bleek dat het niet echt makelijk in een sheet te zetten.
+                    En opdat ik best handig ben met een computer ben dacht ik dan maak ik er een website van zodat andere mensen er ook gebruik van kunnen maken.
+                </p>
+                <h3>Waarom alle advertenties?</h3>
+                <p>Helaas is niet alles op het internet gratis. Het hosten van deze website kost mij gewoon geld.
+                    En ik krijg liever geen hogere studie schuld door deze website. Je mag ook altijd een leuke donatie doen.
+                </p>
+                <h3>Waarom staan er zo veel spelfouten op de website?</h3>
+                <p>Helaas ben ik beter in code schrijven dan in Nederlands schrijven. Je kunt altijd even een mail sturen aan mij en dan zal ik het fixen en leer ik het misschien voor de volgende keer ;)</p>
+                <h3>Volgens mij zie ik een foutje wat nu?</h3>
+                <p>Het kan natuurlijk altijd zijn dat er en foutje is. Stuur mij dan even een email met daarin duidelijk welke data er niet goed is en wat het dan wel moet zijn. Let op dit wil dus niet zeggen dat het meteen gefixt wordt.</p>
+                <h3>Hoe is deze site gemaakt?</h3>
+                <p>Voor de nerds onder ons. Deze site is gemaakt met als core Django en een google cloud Database.
+                Voor de styling is er gebruikt gemaakt van Bootstrap en jquery voor sommige javascript taken.
+                Alles is gehost op een google cloud app engine omgeving om te zorgen dat er altijd genoeg rekenkracht beschikbaar is.
+                Nog wat overige coole tools op de site: Sentry om alle errors te verzamelen, google tag manager om alle tracking tags te kunnen toevoegen.
+                </p>
+            </div>
+            <div class="card-footer">
+                Copyright Dumpertreetenstats 2019-2020
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
