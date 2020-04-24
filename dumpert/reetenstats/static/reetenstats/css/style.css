@@ -102,3 +102,19 @@
         margin-left: 20%;
     }
 }
+
+/*
+    Top 10
+*/
+.top10table tr:first-child td {
+    background-color: gold;
+}
+.top10table tr:nth-child(2) td {
+    background-color: silver;
+}
+.top10table tr:nth-child(3) td {
+    background-color: saddlebrown;
+}
+.top10table{
+    margin-bottom: unset;
+}

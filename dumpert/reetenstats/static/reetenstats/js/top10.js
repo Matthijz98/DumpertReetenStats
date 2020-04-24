@@ -9,7 +9,7 @@ $( document ).ready(function() {
             hiero.append($('<div class="col-md-4"><div class="card">'+
                 '<div class="card-header">'+ entry.name +'</div>'+
                 '<div class="card-body zeropadding">'+
-                '<table class="table table-striped">'+
+                '<table class="table table-striped top10table">'+
                  $.map(entry.data, function(entry, key) {
                      return '<tr><td>' + entry.key + '</td><td>' + entry.value + '</td></tr>'
                  }).join('')+
