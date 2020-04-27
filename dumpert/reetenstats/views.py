@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from .models import Show, Rating, Video
+from .models import Show, Rating, Video, Gast
 import json
-from django.db.models import Avg, Sum
+from django.db.models import Avg, Sum, Count
 from django.http import HttpResponse, request, Http404
+
 
 def showsview(request):
     return render(request=request,
@@ -68,7 +69,7 @@ def top10jsonview(reuest):
         top.append({"key": rating["rating_in_show__show_title"], "value": str(rating["total"])})
     results.append({"name": 'Reeten in show', "data":top})
 
-    # gasten
+    # aantal reeten per gast
     ratings = Rating.objects.values('rating_by__gast_name').annotate(total=Sum('rating_ammount')).order_by(
         '-total')[:10]
     top = []
@@ -76,10 +77,31 @@ def top10jsonview(reuest):
         top.append({"key": rating["rating_by__gast_name"], "value": str(rating["total"])})
     results.append({"name": 'Aantal reeten per gast', "data": top})
 
+    # meest gebruikte rating types
+    ratings = Rating.objects.values('rating_type__rating_type_name').exclude(rating_type=0).annotate(total=Sum('rating_ammount')).order_by(
+        '-total')[:10]
+    top = []
+    for rating in ratings:
+        top.append({"key": rating["rating_type__rating_type_name"], "value": str(rating["total"])})
+    results.append({"name": 'Meest uitgeelde rating soorten', "data": top})
 
+    # aantal reeten per gast
+    ratings = Rating.objects.values('rating_in_show__show_title').annotate(total=Count('rating_video', distinct=True)).order_by(
+        '-total')[:10]
+    top = []
+    for rating in ratings:
+        top.append({"key": rating["rating_in_show__show_title"], "value": str(rating["total"])})
+    results.append({"name": 'Aantal video\'s per show', "data": top})
 
+    # aantal reeten per gast
+    ratings = Rating.objects.values('rating_by__gast_name').annotate(total=Count('rating_in_show', distinct=True)).order_by('-total')[:10]
+    top = []
+    for rating in ratings:
+        top.append({"key": rating["rating_by__gast_name"], "value": str(rating["total"])})
+    results.append({"name": 'Gast in aantal shows', "data": top})
 
 
     data = json.dumps(results)
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+

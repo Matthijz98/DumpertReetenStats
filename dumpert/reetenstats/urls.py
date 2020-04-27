@@ -23,6 +23,6 @@ urlpatterns = [
     path('api/json/ratingsinshow', views.ratinginfojsonview),
     path('api/json/top10', views.top10jsonview),
     path('ads.txt', views.adsview),
-    path('pages/over', views.aboutview, name='about'),
-    path('stats/top10', views.top10view, name="top10")
+    path('page/over', views.aboutview, name='about'),
+    path('stats/top10', views.top10view, name="top10"),
 ]
