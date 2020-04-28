@@ -40,7 +40,7 @@
 /*
     shows page
 */
-.show_card{
+.card-deck .card{
     margin-bottom: 15px !important;
     margin-top: 15px !important;
     overflow: hidden;
