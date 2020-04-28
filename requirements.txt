@@ -4,3 +4,5 @@ gunicorn
 psycopg2
 whitenoise
 sentry-sdk
+beautifulsoup4
+requests
