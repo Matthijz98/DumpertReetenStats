@@ -2,6 +2,13 @@
 
 {% load static %}
 
+{% block header %}
+    <meta title="Dumepert Reeten Stats">
+    <meta name="description" content="Alle statestieken van dumpert reeten verzamelt">
+    <meta >
+{% endblock %}
+
+
 {% block content %}
 
     <div class="page-container">
@@ -10,7 +17,7 @@
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12 zeropadding">
                 <div class="card show_card">
                     <div class="card-header zeropadding">
-                        <img src="https://img.youtube.com/vi/{{ show.show_youtube_id }}/hqdefault.jpg" class="header-img">
+                        <img alt="{{ show.show_title }}" src="https://img.youtube.com/vi/{{ show.show_youtube_id }}/sddefault.jpg" class="header-img">
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -36,7 +43,7 @@
                     </div>
                     <div class="card-footer">
                         {{ show.show_date }}
-                        <a href="/show/dumperteeten-{{ show.id }}">See more</a>
+                        <a href="/show/dumperteeten-{{ show.id }}" title="{{ show.show_title }}">See more</a>
                     </div>
                 </div>
             </div>
