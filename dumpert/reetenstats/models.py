@@ -31,7 +31,7 @@ class Show(models.Model):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(gastencount = Count("rating_by", distinct=True))['gastencount']
 
     def rating_sum(self):
-        return Rating.objects.all().filter(rating_in_show = self.id).aggregate(ratingsum = Sum("rating_ammount", distinct=True))['ratingsum']
+        return Rating.objects.all().filter(rating_in_show = self.id).aggregate(ratingsum = Sum("rating_ammount"))['ratingsum']
 
     def video_count(self):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(videocount = Count("rating_video", distinct=True))['videocount']

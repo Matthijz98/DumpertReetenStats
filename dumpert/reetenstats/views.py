@@ -100,6 +100,13 @@ def top10jsonview(reuest):
         top.append({"key": rating["rating_by__gast_name"], "value": str(rating["total"])})
     results.append({"name": 'Gast in aantal shows', "data": top})
 
+    # video's met de hoogste rating
+    ratings = Rating.objects.values('rating_video__video_title').annotate(total=Sum('rating_ammount')).order_by('-total')[:10]
+    top = []
+    for rating in ratings:
+        top.append({"key": rating["rating_video__video_title"], "value": str(rating["total"])})
+    results.append({"name": 'Video\'s met de hoogste ratings', "data": top})
+
 
     data = json.dumps(results)
     mimetype = 'application/json'
