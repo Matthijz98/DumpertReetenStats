@@ -22,6 +22,7 @@ urlpatterns = [
     path('show/dumperteeten-<int:show_id>', views.showview),
     path('api/json/ratingsinshow', views.ratinginfojsonview),
     path('api/json/top10', views.top10jsonview),
+    path('api/json/shows', views.showsajaxview),
     path('ads.txt', views.adsview),
     path('page/over', views.aboutview, name='about'),
     path('stats/top10', views.top10view, name="top10"),
