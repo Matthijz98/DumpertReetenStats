@@ -3,6 +3,12 @@
 {% block header %}
     <meta title="{{ show.show_title }} statestieken">
     <meta name="description" content="Reeten: {{ show.rating_sum }} Aantal video: {{ show.video_count }}">
+    <title>{{ show.show_title }}</title>
+
+    <meta property="og:title" content="{{ show.show_title }}" />
+    <meta property="og:url" content="http://dumpertreeten-stats.nl/show/dumperteeten-{{ show.id }}" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:image" content="https://img.youtube.com/vi/{{ show.show_youtube_id }}/hqdefault.jpg"/>
 {% endblock %}
 
 

@@ -26,6 +26,9 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '4=1odyi#gw$r12fo9z=xmha__b0**2f_xse03t3(*+r6f9qitq'
 
+# whitenoise settings
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 ENABLE_DEBUG = os.getenv('ENABLE_DEBUG', "False")
 

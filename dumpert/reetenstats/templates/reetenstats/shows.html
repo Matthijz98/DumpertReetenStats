@@ -1,53 +1,18 @@
 {% extends 'reetenstats/base.html' %}
 
 {% load static %}
-
 {% block header %}
-    <meta title="Dumepert Reeten Stats">
-    <meta name="description" content="Alle statestieken van dumpert reeten verzamelt">
-    <meta >
+    <meta title="Dumpert Reeten Stats">
+    <meta name="description" content="Alle statestieken van dumpert reeten verzamelt.
+    En wat is er leuker dat statestieken van je faforiete online show. Dus kom vooral even langs">
+    <title>ReetenStats</title>
 {% endblock %}
 
 
 {% block content %}
-
+    <script src="{% static 'reetenstats/js/index.js' %}"></script>
     <div class="page-container">
-        <div class="card-deck">
-        {% for show in shows %}
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12 zeropadding">
-                <div class="card show_card">
-                    <div class="card-header zeropadding">
-                        <img alt="{{ show.show_title }}" src="https://img.youtube.com/vi/{{ show.show_youtube_id }}/sddefault.jpg" class="header-img">
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <div class="show_stat">
-                                    <i class="material-icons md-48">people</i>
-                                    <p>{{ show.gasten_count }}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <div class="show_stat">
-                                    <img src="{% static 'reetenstats/img/reet/reet-64.png' %}">
-                                    <p>{{ show.rating_sum }}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <div class="show_stat">
-                                    <i class="material-icons md-48">movie</i>
-                                    <p>{{ show.video_count }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        {{ show.show_date }}
-                        <a href="/show/dumperteeten-{{ show.id }}" title="{{ show.show_title }}">See more</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+        <div id="shows-deck" class="card-deck">
         </div>
     </div>
 {% endblock %}
