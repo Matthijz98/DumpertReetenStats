@@ -1,6 +1,0 @@
-dumpertstats:
-  registry: registry.sliceofbits.com
-settings:
-  matching:
-    branches:
-      - master
