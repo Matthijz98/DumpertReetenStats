@@ -2,6 +2,12 @@ kind: pipeline
 name: default
 
 steps:
+- name: django-tests
+  image: python
+    commands:
+      - cd dumpert
+      - pip install -r requirements.txt
+      - python manange.py test
 - name: docker
   image: plugins/docker
   settings:
