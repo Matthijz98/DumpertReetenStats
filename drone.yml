@@ -5,8 +5,10 @@ steps:
 - name: django-tests
   image: python
   commands:
+    - ls
     - pip install -r requirements.txt
     - cd dumpert
+    - ls
     - python manange.py test
 - name: docker
   image: plugins/docker
