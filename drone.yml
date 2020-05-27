@@ -1,0 +1,14 @@
+kind: pipeline
+name: default
+
+steps:
+- name: docker
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: username
+    password:
+      from_secret: password
+    repo: registry.sliceofbits.com/reetenstats
+    registry: registry.sliceofbits.com/
+    tags: latest

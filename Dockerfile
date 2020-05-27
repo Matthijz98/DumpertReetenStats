@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY ./dumpert /code/
 
-CMD bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --no-input && gunicorn dumpert.wsgi --bind :$PORT --workers=5"
+CMD bash -c "python manage.py migrate && python manage.py collectstatic --no-input"
