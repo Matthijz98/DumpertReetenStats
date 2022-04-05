@@ -12,9 +12,9 @@ steps:
   image: plugins/docker
   settings:
     username:
-      from_secret: username
+      from_secret: registry-username
     password:
-      from_secret: password
+      from_secret: registry-password
     repo: registry.sliceofbits.com/reetenstats
     registry: registry.sliceofbits.com/
     tags: latest
