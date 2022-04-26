@@ -2,6 +2,7 @@ from django.db import models
 from filer.fields.image import FilerImageField
 from django.db.models import Count, Sum
 
+
 class Gast(models.Model):
     gast_name = models.CharField(max_length=64)
     gast_underline = models.CharField(max_length=64)
@@ -42,8 +43,8 @@ class Show(models.Model):
 
 class Video(models.Model):
     video_title = models.CharField(max_length=255)
-    video_description = models.TextField()
-    video_dumpert_id = models.CharField(max_length=64)
+    video_description = models.TextField(null=True, blank=True)
+    video_dumpert_id = models.CharField(max_length=64, null=True, blank=True)
 
     def __str__(self):
         return self.video_title
@@ -51,6 +52,7 @@ class Video(models.Model):
 
 class RatingType(models.Model):
     rating_type_name = models.CharField(max_length=128)
+    rating_type_img = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.rating_type_name
