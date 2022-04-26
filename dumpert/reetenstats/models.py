@@ -22,10 +22,10 @@ class Gast(models.Model):
 
 
 class Show(models.Model):
-    show_title = models.CharField(max_length=255)
-    show_description = models.TextField()
-    show_youtube_id = models.CharField(max_length=32)
-    show_dumpert_id = models.CharField(max_length=32)
+    show_title = models.CharField(max_length=255, null=True, blank=True)
+    show_description = models.TextField(null=True, blank=True)
+    show_youtube_id = models.CharField(max_length=32, null=True, blank=True)
+    show_dumpert_id = models.CharField(max_length=32, null=True, blank=True)
     show_date = models.DateField(null=True)
 
     def gasten_count(self):
@@ -42,7 +42,7 @@ class Show(models.Model):
 
 
 class Video(models.Model):
-    video_title = models.CharField(max_length=255)
+    video_title = models.CharField(null=True, blank=True, max_length=255)
     video_description = models.TextField(null=True, blank=True)
     video_dumpert_id = models.CharField(max_length=64, null=True, blank=True)
 
