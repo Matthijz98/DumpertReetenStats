@@ -5,7 +5,7 @@ from django.db.models import Count, Sum
 
 class Gast(models.Model):
     gast_name = models.CharField(max_length=64)
-    gast_underline = models.CharField(max_length=64)
+    gast_underline = models.CharField(max_length=64, null=True, blank=True)
     gast_age = models.DateField(null=True, blank=True)
     gast_img = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
     gast_facebook = models.URLField(null=True, blank=True)
