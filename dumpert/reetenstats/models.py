@@ -26,7 +26,7 @@ class Show(models.Model):
     show_description = models.TextField(null=True, blank=True)
     show_youtube_id = models.CharField(max_length=32, null=True, blank=True)
     show_dumpert_id = models.CharField(max_length=32, null=True, blank=True)
-    show_date = models.DateField(null=True)
+    show_date = models.DateField(blank=True ,null=True)
 
     def gasten_count(self):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(gastencount = Count("rating_by", distinct=True))['gastencount']
