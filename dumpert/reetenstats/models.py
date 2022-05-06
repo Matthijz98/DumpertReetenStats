@@ -25,8 +25,8 @@ class Gast(models.Model):
 class Show(models.Model):
     show_title = models.CharField(max_length=255, null=True, blank=True)
     show_description = models.TextField(null=True, blank=True)
-    show_youtube_id = models.CharField(max_length=32, null=True, blank=True)
-    show_dumpert_id = models.CharField(max_length=32, null=True, blank=True)
+    show_youtube_id = models.CharField(max_length=32, null=True, blank=True, unique=True)
+    show_dumpert_id = models.CharField(max_length=32, null=True, blank=True, unique=True)
     show_date = models.DateField(blank=True, null=True)
 
     def gasten_count(self):
