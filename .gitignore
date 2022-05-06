@@ -8,3 +8,5 @@ dumpert/reetenstats/__pycache__/
 dumpert/reetenstats/migrations/__pycache__/
 
 dumpert/db.sqlite3
+
+reetenstats-db-data

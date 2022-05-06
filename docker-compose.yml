@@ -4,38 +4,30 @@ services:
   db:
     image: postgres:latest
     volumes:
-      - reetenstats-db-data:/var/lib/postgresql/data
+      - ./reetenstats-db-data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_DB: reetenstats
-    restart: unless-stopped
+      POSTGRES_PASSWORD: pass # set a password for the database
+      POSTGRES_USER: root # set the username for the database
 
   stable_app:
-    image: matthijz98/hap-map:latest
+    build: .
     container_name: DumpertStatsDjango
-    command: bash -c "python manage.py migrate && python manage.py collectstatic --no-input && gunicorn reetenstats.wsgi --bind 0.0.0.0:8001 --workers=2"
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --no-input && gunicorn dumpert.wsgi --bind 0.0.0.0:8001 --workers=2"
     depends_on:
       - db
-    labels:
-      - "traefik.enable=true" # <== Enable traefik to proxy this container
-      - "traefik.http.routers.reetenstats.rule=Host(`dumpertreeten-stats.nl`)" #$
-      - "traefik.http.routers.reetenstats.entrypoints=web-secured" # <== Defining the$
-      - "traefik.http.routers.reetenstats.service=reetenstats-service"
-      - "traefik.http.routers.reetenstats.tls=true"
-      - "traefik.http.routers.reetenstats.tls.certresolver=myresolver"
-      - "traefik.http.services.reetenstats-service.loadbalancer.server.port=8001"
-    restart: unless-stopped
     environment:
-      - DEV=False
-      - DEBUG=False
+      - DEV=True
+      - ENABLE_DEBUG=True
+      - DB_TYPE=postgressql
+      - DB_NAME=reetenstats
+      - DB_USER=root
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_PASSWORD=pass
     ports:
-      - 8001:8001
+      - "8001:8001"
 
-  adminer:
-    image: adminer
-    restart: always
-
-volumes:
-  reetenstats-db-data:
 

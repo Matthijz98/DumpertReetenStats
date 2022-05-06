@@ -1,6 +1,7 @@
 from django.db import models
 from filer.fields.image import FilerImageField
 from django.db.models import Count, Sum
+from pytube import YouTube
 
 
 class Gast(models.Model):
@@ -26,7 +27,7 @@ class Show(models.Model):
     show_description = models.TextField(null=True, blank=True)
     show_youtube_id = models.CharField(max_length=32, null=True, blank=True)
     show_dumpert_id = models.CharField(max_length=32, null=True, blank=True)
-    show_date = models.DateField(blank=True ,null=True)
+    show_date = models.DateField(blank=True, null=True)
 
     def gasten_count(self):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(gastencount = Count("rating_by", distinct=True))['gastencount']
@@ -38,7 +39,18 @@ class Show(models.Model):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(videocount = Count("rating_video", distinct=True))['videocount']
 
     def __str__(self):
-        return self.show_title
+        if self.show_title:
+            return self.show_title
+        else:
+            return 'No title'
+
+    def update_info_from_youtube(self):
+        if self.show_youtube_id:
+            yt = YouTube(f'https://www.youtube.com/watch?v={self.show_youtube_id}')
+            self.show_title = yt.title
+            self.show_description = yt.description
+            self.show_date = yt.publish_date
+            self.save()
 
 
 class Video(models.Model):
