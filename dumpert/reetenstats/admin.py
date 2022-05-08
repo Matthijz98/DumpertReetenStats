@@ -2,8 +2,14 @@ from django.contrib import admin
 from .models import Show, Gast, RatingType, Rating, Video
 
 
+def update_dumpert_id_video(self, request, queryset):
+    for video in queryset:
+        video.update_dumpert_id()
+
+
 class VideoAdmin(admin.ModelAdmin):
     search_fields = ["video_title"]
+    actions = [update_dumpert_id_video]
     list_display = ["video_title", "video_dumpert_id"]
     ordering = ['-id']
 
