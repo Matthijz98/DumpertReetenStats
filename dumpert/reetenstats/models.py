@@ -1,3 +1,4 @@
+import requests
 from django.db import models
 from filer.fields.image import FilerImageField
 from django.db.models import Count, Sum
@@ -44,12 +45,31 @@ class Show(models.Model):
         else:
             return 'No title'
 
+    def update_dumpert_id(self):
+        new_id = self.show_dumpert_id.replace("/", "_", 1).replace("/", "")
+        self.show_dumpert_id = new_id
+        self.save()
+
     def update_info_from_youtube(self):
         if self.show_youtube_id:
             yt = YouTube(f'https://www.youtube.com/watch?v={self.show_youtube_id}')
             self.show_title = yt.title
-            self.show_description = yt.description
             self.show_date = yt.publish_date
+            self.save()
+
+    def update_info_from_dumpert(self):
+        if self.show_dumpert_id:
+            import requests
+            from bs4 import BeautifulSoup
+
+            URL = f"https://www.dumpert.nl/?selectedId={self.show_dumpert_id}"
+            page = requests.get(URL)
+
+            soup = BeautifulSoup(page.content, "html.parser")
+
+            results = soup.find_all("div", {"class": "description"})
+
+            self.show_description = (results[0].decode_contents())
             self.save()
 
 

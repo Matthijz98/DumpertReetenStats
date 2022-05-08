@@ -1,8 +1,5 @@
 from django.contrib import admin
 from .models import Show, Gast, RatingType, Rating, Video
-import re
-import requests
-from bs4 import BeautifulSoup
 
 
 class VideoAdmin(admin.ModelAdmin):
@@ -35,11 +32,21 @@ def update_info_from_youtube(self, request, queryset):
         show.update_info_from_youtube()
 
 
+def update_info_from_dumpert(self, request, queryset):
+    for show in queryset:
+        show.update_info_from_dumpert()
+
+
+def update_dumpert_id(self, request, queryset):
+    for show in queryset:
+        show.update_dumpert_id()
+
+
 class ShowAdmin(admin.ModelAdmin):
     model = Show
     list_display = ["show_title", "show_date", "show_youtube_id", "show_dumpert_id", "gasten_count", "rating_sum", "video_count"]
     inlines = [RatingInlineAdmin]
-    actions = [update_info_from_youtube]
+    actions = [update_info_from_youtube, update_info_from_dumpert, update_dumpert_id]
 
 
 # Register your models here.
