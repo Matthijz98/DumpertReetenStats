@@ -33,6 +33,11 @@ class RatingInlineAdmin(admin.StackedInline):
     autocomplete_fields = ["rating_by", "rating_type", "rating_video"]
 
 
+def get_videos_from_desc(self, request, queryset):
+    for show in queryset:
+        show.get_videos_from_desc()
+
+
 def update_info_from_youtube(self, request, queryset):
     for show in queryset:
         show.update_info_from_youtube()
@@ -52,7 +57,7 @@ class ShowAdmin(admin.ModelAdmin):
     model = Show
     list_display = ["show_title", "show_date", "show_youtube_id", "show_dumpert_id", "gasten_count", "rating_sum", "video_count"]
     inlines = [RatingInlineAdmin]
-    actions = [update_info_from_youtube, update_info_from_dumpert, update_dumpert_id]
+    actions = [update_info_from_youtube, update_info_from_dumpert, update_dumpert_id, get_videos_from_desc]
 
 
 # Register your models here.

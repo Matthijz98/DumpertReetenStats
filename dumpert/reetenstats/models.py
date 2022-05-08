@@ -1,8 +1,10 @@
-import requests
+import re
 from django.db import models
 from filer.fields.image import FilerImageField
 from django.db.models import Count, Sum
 from pytube import YouTube
+import requests
+from bs4 import BeautifulSoup
 
 
 class Gast(models.Model):
@@ -60,8 +62,6 @@ class Show(models.Model):
 
     def update_info_from_dumpert(self):
         if self.show_dumpert_id:
-            import requests
-            from bs4 import BeautifulSoup
 
             URL = f"https://www.dumpert.nl/?selectedId={self.show_dumpert_id}"
             page = requests.get(URL)
@@ -72,6 +72,35 @@ class Show(models.Model):
 
             self.show_description = (results[0].decode_contents())
             self.save()
+
+    def get_videos_from_desc(self):
+        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', self.show_description)
+
+        for url in urls:
+            page = requests.get(url)
+            soup = BeautifulSoup(page.content, 'html.parser')
+
+            title = soup.find(class_='title')
+            if title is None:
+                titletext = "bestaad niet meer"
+            else:
+                titletext = str(title.text)
+
+            description = soup.find(class_='detail_description--397a1n')
+
+            if description is None:
+                descriptiontext = "bestaad niet meer"
+            else:
+                descriptiontext = str(description.decode_contents())
+
+            try:
+                dumpertid = str(page.url.split('https://www.dumpert.nl/item/')[1].rsplit('/', 1)[0])
+            except IndexError:
+                dumpertid = ''
+
+            Video.objects.get_or_create(video_title=titletext,
+                                        video_description=descriptiontext,
+                                        video_dumpert_id=dumpertid)
 
 
 class Video(models.Model):
