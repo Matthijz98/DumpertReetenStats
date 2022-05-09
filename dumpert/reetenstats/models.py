@@ -113,7 +113,7 @@ class Video(models.Model):
         return self.video_title
 
     def update_dumpert_id(self):
-        if self.show_dumpert_id:
+        if self.video_dumpert_id:
             new_id = self.video_dumpert_id.replace("/", "_", 1).replace("/", "")
             self.video_dumpert_id = new_id
             self.save()
