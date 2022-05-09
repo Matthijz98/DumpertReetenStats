@@ -107,6 +107,7 @@ class Video(models.Model):
     video_title = models.CharField(null=True, blank=True, max_length=255)
     video_description = models.TextField(null=True, blank=True)
     video_dumpert_id = models.CharField(max_length=64, null=True, blank=True)
+    video_override_url = models.CharField(max_length=64, null=True, blank=True)
 
     def __str__(self):
         return self.video_title
