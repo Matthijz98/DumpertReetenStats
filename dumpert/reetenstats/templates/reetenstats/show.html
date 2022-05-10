@@ -45,12 +45,20 @@
                     <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td>Title</td>
-                        <td>{{ show.show_title }}</td>
+                        <td>Youtube titel</td>
+                        <td>{{ show.show_yt_title }}</td>
                     </tr>
                     <tr>
-                        <td>Datum</td>
-                        <td>{{ show.show_date }}</td>
+                        <td>Dumpert titel</td>
+                        <td>{{ show.show_yt_title }}</td>
+                    </tr>
+                    <tr>
+                        <td>Youtube datum</td>
+                        <td>{{ show.show_yt_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Video lengte youtube</td>
+                        <td>{{ show.show_yt_length }}</td>
                     </tr>
                     <tr>
                         <td>NR Items</td>
@@ -61,14 +69,6 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Views Youtube</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Views Dumpert</td>
-                        <td></td>
-                    </tr>
-                    <tr>
                         <td>Gasten</td>
                         <td></td>
                     </tr>
@@ -76,7 +76,7 @@
             </table>
                 </div>
                 <div class="col-md-6">
-                    {{ show.show_description | safe }}
+                    {{ show.show_dumpert_description | safe }}
                 </div>
             </div>
 

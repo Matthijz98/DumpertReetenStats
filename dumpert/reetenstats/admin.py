@@ -55,7 +55,7 @@ def update_dumpert_id(self, request, queryset):
 
 class ShowAdmin(admin.ModelAdmin):
     model = Show
-    list_display = ["show_title", "show_date", "show_youtube_id", "show_dumpert_id", "gasten_count", "rating_sum", "video_count"]
+    list_display = ["show_yt_title", "show_yt_date", "show_youtube_id", "show_dumpert_id", "gasten_count", "rating_sum", "video_count"]
     inlines = [RatingInlineAdmin]
     actions = [update_info_from_youtube, update_info_from_dumpert, update_dumpert_id, get_videos_from_desc]
 

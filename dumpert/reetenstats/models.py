@@ -26,11 +26,19 @@ class Gast(models.Model):
 
 
 class Show(models.Model):
-    show_title = models.CharField(max_length=255, null=True, blank=True)
-    show_description = models.TextField(null=True, blank=True)
+    show_yt_title = models.CharField(max_length=255, null=True, blank=True)
+    show_dumpert_title = models.CharField(max_length=255, null=True, blank=True)
+
+    show_yt_description = models.TextField(null=True, blank=True)
+    show_dumpert_description = models.TextField(null=True, blank=True)
+
     show_youtube_id = models.CharField(max_length=32, null=True, blank=True, unique=True)
     show_dumpert_id = models.CharField(max_length=32, null=True, blank=True, unique=True)
-    show_date = models.DateField(blank=True, null=True)
+
+    show_yt_date = models.DateField(blank=True, null=True)
+    show_dumpert_date = models.DateField(blank=True, null=True)
+
+    show_yt_length = models.IntegerField(blank=True, null=True)
 
     def gasten_count(self):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(gastencount = Count("rating_by", distinct=True))['gastencount']
@@ -42,8 +50,8 @@ class Show(models.Model):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(videocount = Count("rating_video", distinct=True))['videocount']
 
     def __str__(self):
-        if self.show_title:
-            return self.show_title
+        if self.show_yt_title:
+            return self.show_yt_title
         else:
             return 'No title'
 
@@ -56,8 +64,10 @@ class Show(models.Model):
     def update_info_from_youtube(self):
         if self.show_youtube_id:
             yt = YouTube(f'https://www.youtube.com/watch?v={self.show_youtube_id}')
-            self.show_title = yt.title
-            self.show_date = yt.publish_date
+            self.show_yt_title = yt.title
+            self.show_yt_length = yt.length
+            self.show_yt_date = yt.publish_date
+            self.show_yt_description = yt.description
             self.save()
 
     def update_info_from_dumpert(self):
@@ -70,7 +80,8 @@ class Show(models.Model):
 
             results = soup.find_all("div", {"class": "description"})
 
-            self.show_description = (results[0].decode_contents())
+            self.show_dumpert_description = results[0].decode_contents()
+            self.show_dumpert_title = soup.find_all("h3", {"class": "title"})[0].decode_contents()
             self.save()
 
     def get_videos_from_desc(self):

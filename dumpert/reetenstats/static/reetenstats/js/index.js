@@ -23,7 +23,7 @@ $( document ).ready(function() {
                 '                            <div class="col-md-4 col-sm-4 col-xs-4">\n' +
                 '                                <div class="show_stat">\n' +
                 '                                    <img src="./static/reetenstats/img/reet/reet-64.png" alt="reet">\n' +
-                '                                    <p>'+entry.rating_sum+'</p>\n' +
+                '                                    <p>'+parseFloat(entry.rating_sum).toString()+'</p>\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
                 '                            <div class="col-md-4 col-sm-4 col-xs-4">\n' +
