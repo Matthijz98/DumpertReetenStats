@@ -11,22 +11,6 @@ def showsview(request):
                   context={"shows": Show.objects.all().order_by('-show_yt_date')})
 
 
-def showsajaxview(request):
-    shows = Show.objects.all().order_by('-show_yt_date')
-    results = []
-    for show in shows:
-        results.append({"id": show.id,
-                        "title": show.show_yt_title,
-                        "youtube_id": show.show_youtube_id,
-                        "gasten_count": show.gasten_count(),
-                        "video_count": show.video_count(),
-                        "rating_sum": str(show.rating_sum()),
-                        "date": str(show.show_yt_date)})
-    data = json.dumps(results)
-    mimetype = 'application/json'
-    return HttpResponse(data, mimetype)
-
-
 def showview(request, show_id):
     data = {"show": Show.objects.get(id=show_id)}
     return render(request=request,
