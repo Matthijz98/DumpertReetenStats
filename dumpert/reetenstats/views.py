@@ -61,10 +61,10 @@ def top10jsonview(reuest):
     results = []
 
     # reeten in shows
-    ratings = Rating.objects.values('rating_in_show__show_title').annotate(total=Sum('rating_ammount')).order_by('-total')[:10]
+    ratings = Rating.objects.values('rating_in_show__show_yt_title').annotate(total=Sum('rating_ammount')).order_by('-total')[:10]
     top = []
     for rating in ratings:
-        top.append({"key": rating["rating_in_show__show_title"], "value": str(rating["total"])})
+        top.append({"key": rating["rating_in_show__show_yt_title"], "value": str(rating["total"])})
     results.append({"name": 'Reeten in show', "data":top})
 
     # aantal reeten per gast
@@ -84,11 +84,11 @@ def top10jsonview(reuest):
     results.append({"name": 'Meest uitgeelde rating soorten', "data": top})
 
     # aantal reeten per gast
-    ratings = Rating.objects.values('rating_in_show__show_title').annotate(total=Count('rating_video', distinct=True)).order_by(
+    ratings = Rating.objects.values('rating_in_show__show_yt_title').annotate(total=Count('rating_video', distinct=True)).order_by(
         '-total')[:10]
     top = []
     for rating in ratings:
-        top.append({"key": rating["rating_in_show__show_title"], "value": str(rating["total"])})
+        top.append({"key": rating["rating_in_show__show_yt_title"], "value": str(rating["total"])})
     results.append({"name": 'Aantal video\'s per show', "data": top})
 
     # aantal reeten per gast
@@ -104,7 +104,6 @@ def top10jsonview(reuest):
     for rating in ratings:
         top.append({"key": rating["rating_video__video_title"], "value": str(rating["total"])})
     results.append({"name": 'Video\'s met de hoogste ratings', "data": top})
-
 
     data = json.dumps(results)
     mimetype = 'application/json'
