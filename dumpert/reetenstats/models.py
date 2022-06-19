@@ -85,7 +85,7 @@ class Show(models.Model):
             self.save()
 
     def get_videos_from_desc(self):
-        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', self.show_description)
+        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', self.show_dumpert_description)
 
         for url in urls:
             page = requests.get(url)
