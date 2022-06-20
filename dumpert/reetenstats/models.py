@@ -121,7 +121,10 @@ class Video(models.Model):
     video_override_url = models.CharField(max_length=64, null=True, blank=True)
 
     def __str__(self):
-        return self.video_title
+        if self.video_title:
+            return self.video_title
+        else:
+            return "No title"
 
     def update_dumpert_id(self):
         if self.video_dumpert_id:
