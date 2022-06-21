@@ -5,10 +5,76 @@
 {% block content %}
 
 <div class="page-container">
-    <div class="card-columns" id="hiero">
+    <div class="card-columns">
+        <div class="card">
+            <div class="card-header">Reeten in show</div>
+            <div class="card-body zeropadding">
+                <table class="table table-striped top10table">
+                    {% for item in reeten_in_show %}
+                        <tr><td><a href="/show/{{ item.rating_in_show_id }}">{{ item.rating_in_show__show_yt_title }}</a></td><td>{{ item.total }}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
 
+        <div class="card">
+            <div class="card-header">Reeten per gast</div>
+            <div class="card-body zeropadding">
+                <table class="table table-striped top10table">
+                    {% for item in reeten_by_gast %}
+                        <tr><td>{{ item.rating_by__gast_name }}</td><td>{{ item.total }}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
 
+        <div class="card">
+            <div class="card-header">Meest gebruikte rating type</div>
+            <div class="card-body zeropadding">
+                <table class="table table-striped top10table">
+                    {% for item in most_used_rating_types %}
+                        <tr><td>{{ item.rating_type__rating_type_name }}</td><td>{{ item.total }}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Aantal videos in show </div>
+            <div class="card-body zeropadding">
+                <table class="table table-striped top10table">
+                    {% for item in video_per_show %}
+                        <tr><td><a href="/show/{{ item.rating_in_show_id }}">{{ item.rating_in_show__show_yt_title }}</a></td><td>{{ item.total }}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Gast in aantal shows</div>
+            <div class="card-body zeropadding">
+                <table class="table table-striped top10table">
+                    {% for item in gast_in_shows %}
+                        <tr><td>{{ item.rating_by__gast_name }}</td><td>{{ item.total }}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Best gereeten video</div>
+            <div class="card-body zeropadding">
+                <table class="table table-striped top10table">
+                    {% for item in video_highest_ratings %}
+                        <tr><td>{{ item.rating_video__video_title }}</td><td>{{ item.total }}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-{%  load static %}
-<script src="{% static 'reetenstats/js/top10.js' %}"></script>
+
+
+
+
 {% endblock %}

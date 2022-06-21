@@ -53,59 +53,36 @@ def aboutview(request):
 
 
 def top10view(request):
-    return render(request=request,
-                   template_name='reetenstats/top10.html')
-
-
-def top10jsonview(reuest):
-    results = []
-
     # reeten in shows
-    ratings = Rating.objects.values('rating_in_show__show_yt_title').annotate(total=Sum('rating_ammount')).order_by('-total')[:10]
-    top = []
-    for rating in ratings:
-        top.append({"key": rating["rating_in_show__show_yt_title"], "value": str(rating["total"])})
-    results.append({"name": 'Reeten in show', "data":top})
+    reeten_in_show = Rating.objects.values('rating_in_show__show_yt_title', 'rating_in_show_id').annotate(total=Sum('rating_ammount')).order_by('-total')[:10]
 
     # aantal reeten per gast
-    ratings = Rating.objects.values('rating_by__gast_name').annotate(total=Sum('rating_ammount')).order_by(
+    reeten_by_gast = Rating.objects.values('rating_by__gast_name', 'rating_by_id').annotate(total=Sum('rating_ammount')).order_by(
         '-total')[:10]
-    top = []
-    for rating in ratings:
-        top.append({"key": rating["rating_by__gast_name"], "value": str(rating["total"])})
-    results.append({"name": 'Aantal reeten per gast', "data": top})
 
     # meest gebruikte rating types
-    ratings = Rating.objects.values('rating_type__rating_type_name').exclude(rating_type=0).annotate(total=Sum('rating_ammount')).order_by(
+    most_used_rating_types = Rating.objects.values('rating_type__rating_type_name').exclude(rating_type=0).annotate(total=Sum('rating_ammount')).order_by(
         '-total')[:10]
-    top = []
-    for rating in ratings:
-        top.append({"key": rating["rating_type__rating_type_name"], "value": str(rating["total"])})
-    results.append({"name": 'Meest uitgeelde rating soorten', "data": top})
+
+    # aantal reeten per video
+    video_per_show = Rating.objects.values('rating_in_show__show_yt_title', 'rating_in_show_id').annotate(total=Count('rating_video', distinct=True)).order_by(
+        '-total')[:10]
 
     # aantal reeten per gast
-    ratings = Rating.objects.values('rating_in_show__show_yt_title').annotate(total=Count('rating_video', distinct=True)).order_by(
-        '-total')[:10]
-    top = []
-    for rating in ratings:
-        top.append({"key": rating["rating_in_show__show_yt_title"], "value": str(rating["total"])})
-    results.append({"name": 'Aantal video\'s per show', "data": top})
-
-    # aantal reeten per gast
-    ratings = Rating.objects.values('rating_by__gast_name').annotate(total=Count('rating_in_show', distinct=True)).order_by('-total')[:10]
-    top = []
-    for rating in ratings:
-        top.append({"key": rating["rating_by__gast_name"], "value": str(rating["total"])})
-    results.append({"name": 'Gast in aantal shows', "data": top})
+    gast_in_shows = Rating.objects.values('rating_by__gast_name').annotate(total=Count('rating_in_show', distinct=True)).order_by('-total')[:10]
 
     # video's met de hoogste rating
-    ratings = Rating.objects.values('rating_video__video_title').annotate(total=Sum('rating_ammount')).order_by('-total')[:10]
-    top = []
-    for rating in ratings:
-        top.append({"key": rating["rating_video__video_title"], "value": str(rating["total"])})
-    results.append({"name": 'Video\'s met de hoogste ratings', "data": top})
+    video_highest_ratings = Rating.objects.values('rating_video__video_title').annotate(total=Sum('rating_ammount')).order_by('-total')[:10]
 
-    data = json.dumps(results)
-    mimetype = 'application/json'
-    return HttpResponse(data, mimetype)
+    context = {"reeten_in_show": reeten_in_show,
+               "reeten_by_gast": reeten_by_gast,
+               "most_used_rating_types": most_used_rating_types,
+               "video_per_show": video_per_show,
+               "gast_in_shows": gast_in_shows,
+               "video_highest_ratings": video_highest_ratings}
+
+    return render(request=request,
+                  template_name='reetenstats/top10.html',
+                  context=context)
+
 
