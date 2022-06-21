@@ -1,0 +1,55 @@
+{% extends 'reetenstats/base.html' %}
+
+{% load static %}
+
+{% block header %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <script>
+
+      const data = {
+        labels: {{ labels | safe }},
+        datasets: [{
+          label: 'Reeten',
+          backgroundColor: '#66C221',
+          borderColor: '#66C221',
+          data: {{ data | safe }},
+        }]
+      };
+
+      const config = {
+        type: 'bar',
+        data: data,
+        options: {}
+      };
+
+    </script>
+
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="card">
+        <div class="card-header"><a href="/stats/reeten_in_show_details">Reeten in show</a></div>
+        <div class="card-body zeropadding">
+            <table class="table table-striped top10table">
+                {% for item in ratings %}
+                    <tr><td><a href="/show/{{ item.rating_in_show_id }}">{{ item.rating_in_show__show_yt_title }}</a></td><td>{{ item.total }}</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+</script>
+{% endblock %}
