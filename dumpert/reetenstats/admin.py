@@ -8,9 +8,13 @@ def update_dumpert_id_video(self, request, queryset):
 
 
 class VideoAdmin(admin.ModelAdmin):
+    def get_thumbnail(self, request, queryset):
+        for video in queryset:
+            video.get_thumbnail()
+
     search_fields = ["video_title"]
-    actions = [update_dumpert_id_video]
-    list_display = ["video_title", "video_dumpert_id"]
+    actions = [update_dumpert_id_video, get_thumbnail]
+    list_display = ["video_title", "video_dumpert_id", "video_thumbnail"]
     ordering = ['-id']
 
 
@@ -55,7 +59,7 @@ def update_dumpert_id(self, request, queryset):
 
 class ShowAdmin(admin.ModelAdmin):
     model = Show
-    list_display = ["show_yt_title", "show_yt_date", "show_youtube_id", "show_dumpert_id", "gasten_count", "rating_sum", "video_count"]
+    list_display = ["show_yt_title", "show_yt_date", "show_youtube_id", "show_dumpert_id", "gasten_count", "reeten_sum", "video_count"]
     inlines = [RatingInlineAdmin]
     actions = [update_info_from_youtube, update_info_from_dumpert, update_dumpert_id, get_videos_from_desc]
 

@@ -40,14 +40,22 @@ class Show(models.Model):
 
     show_yt_length = models.IntegerField(blank=True, null=True)
 
+    @property
     def gasten_count(self):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(gastencount = Count("rating_by", distinct=True))['gastencount']
 
-    def rating_sum(self):
+    @property
+    def reeten_sum(self):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(ratingsum = Sum("rating_ammount"))['ratingsum']
 
+    @property
     def video_count(self):
         return Rating.objects.all().filter(rating_in_show = self.id).aggregate(videocount = Count("rating_video", distinct=True))['videocount']
+
+    @property
+    def gasten_in_show(self):
+        return Gast.objects.filter(rating__rating_in_show_id=self).distinct()
+
 
     def __str__(self):
         if self.show_yt_title:
@@ -119,6 +127,7 @@ class Video(models.Model):
     video_description = models.TextField(null=True, blank=True)
     video_dumpert_id = models.CharField(max_length=64, null=True, blank=True)
     video_override_url = models.CharField(max_length=64, null=True, blank=True)
+    video_thumbnail = models.CharField(max_length=128, null=True, blank=True)
 
     def __str__(self):
         if self.video_title:
@@ -130,6 +139,14 @@ class Video(models.Model):
         if self.video_dumpert_id:
             new_id = self.video_dumpert_id.replace("/", "_", 1).replace("/", "")
             self.video_dumpert_id = new_id
+            self.save()
+
+    def get_thumbnail(self):
+        page = requests.get(f"https://www.dumpert.nl/?selectedId={self.video_dumpert_id}")
+        if page:
+            soup = BeautifulSoup(page.content, 'html.parser')
+            thumnail_url = soup.find("meta",  property="og:image").get("content")
+            self.video_thumbnail = thumnail_url
             self.save()
 
 
