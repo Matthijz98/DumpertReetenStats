@@ -142,12 +142,13 @@ class Video(models.Model):
             self.save()
 
     def get_thumbnail(self):
-        page = requests.get(f"https://www.dumpert.nl/?selectedId={self.video_dumpert_id}")
-        if page:
-            soup = BeautifulSoup(page.content, 'html.parser')
-            thumnail_url = soup.find("meta",  property="og:image").get("content")
-            self.video_thumbnail = thumnail_url
-            self.save()
+        if self.video_dumpert_id:
+            page = requests.get(f"https://www.dumpert.nl/?selectedId={self.video_dumpert_id}")
+            if page:
+                soup = BeautifulSoup(page.content, 'html.parser')
+                thumnail_url = soup.find("meta",  property="og:image").get("content")
+                self.video_thumbnail = thumnail_url
+                self.save()
 
 
 class RatingType(models.Model):
