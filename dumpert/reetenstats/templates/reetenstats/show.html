@@ -99,6 +99,26 @@
                             </tr>
                         </thead>
                         <tbody id="ratings-table">
+                        {% for video in videos %}
+                            <tr>
+                                <td>
+                                    <a href="https://www.dumpert.nl/?selectedId={{ video.video_dumpert_id }}">
+                                        <img class="img-fluid" style="max-height: 15vh" src="{{ video.video_thumbnail }}">
+                                    </a>
+                                </td>
+                                <td>
+                                    Title: {{ video.video_title }} <br>
+                                    Description: {{ video.video_description }}
+                                </td>
+                                <td>
+                                    {% for rating in video.rating_set.filter.all %}
+                                        {% if rating.rating_type_id != 0 %}
+                                            {{ rating.rating_by }} - {{ rating.rating_ammount.normalize }} {{ rating.rating_type }}<br>
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -106,7 +126,5 @@
         </div>
     </div>
 </div>
-{%  load static %}
-<script src="{% static 'reetenstats/js/show.js' %}"></script>
 {% endblock %}
 
